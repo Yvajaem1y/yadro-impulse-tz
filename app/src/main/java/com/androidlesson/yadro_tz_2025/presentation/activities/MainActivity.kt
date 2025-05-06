@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         checkContactsPermission()
     }
 
-    private fun setBarColor(){
+    private fun setBarColor() {
         val statusBarColor = Color.parseColor("#FFFFFF")
         val navigationBarColor = Color.parseColor("#F5F5F5")
 
@@ -50,11 +50,15 @@ class MainActivity : AppCompatActivity() {
 
             window.statusBarColor = statusBarColor
 
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                window.decorView.systemUiVisibility =
+                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            }
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 window.navigationBarColor = navigationBarColor
-            } else {
-                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                window.navigationBarColor = navigationBarColor
+                window.decorView.systemUiVisibility =
+                    window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
             }
         }
     }
